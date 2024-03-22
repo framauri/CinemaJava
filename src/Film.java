@@ -1,12 +1,12 @@
-public abstract class Film {
+public class Film {
     private String titolo;
     private String genere;
-    private String durata;
+    private int durata;
 
     public Film () {
     }
 
-    public Film ( String titolo, String genere, String durata ) {
+    public Film ( String titolo, String genere, int durata ) {
         this.titolo = titolo;
         this.genere = genere;
         this.durata = durata;
@@ -28,11 +28,11 @@ public abstract class Film {
         this.genere = genere;
     }
 
-    public String getDurata () {
+    public int getDurata () {
         return durata;
     }
 
-    public void setDurata ( String durata ) {
+    public void setDurata ( int durata ) {
         this.durata = durata;
     }
 }

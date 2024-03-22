@@ -15,10 +15,56 @@ public class Cinema extends Sala {
         arrayDate = new Date[100];
     }
 
+    public String[] getArrayFilm () {
+        return arrayFilm;
+    }
 
+    public void setArrayFilm ( String[] arrayFilm ) {
+        this.arrayFilm = arrayFilm;
+    }
 
+    public String[] getArrayDurata () {
+        return arrayDurata;
+    }
 
+    public void setArrayDurata ( String[] arrayDurata ) {
+        this.arrayDurata = arrayDurata;
+    }
 
+    public Date[] getArrayDate () {
+        return arrayDate;
+    }
+
+    public void setArrayDate ( Date[] arrayDate ) {
+        this.arrayDate = arrayDate;
+    }
+
+    //getset per posizione
+    //*******************************
+    //da modificare e implementare
+    public String[] getArrayFilmPos (int pos) {
+        return arrayFilm;
+    }
+
+    public void setArrayFilmPos ( String[] arrayFilm, int pos ) {
+        this.arrayFilm = arrayFilm;
+    }
+
+    public String[] getArrayDurataPos (int pos) {
+        return arrayDurata;
+    }
+
+    public void setArrayDurataPos ( String[] arrayDurata, int pos ) {
+        this.arrayDurata = arrayDurata;
+    }
+
+    public Date[] getArrayDatePos (int pos) {
+        return arrayDate;
+    }
+
+    public void setArrayDatePos ( Date[] arrayDate, int pos ) {
+        this.arrayDate = arrayDate;
+    }
 
 
     //end progetto
