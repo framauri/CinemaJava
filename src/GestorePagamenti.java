@@ -1,5 +1,5 @@
 public class GestorePagamenti implements InterfacciaPagamento {
-    public void effettuaPagamento(Biglietto biglietto) {
+    public void effettuaPagamento(Biglietto biglietto, double saldo) {
         // Implementazione del metodo
     }
 
