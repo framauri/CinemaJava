@@ -5,22 +5,18 @@ import cinema.models.Film;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GestoreFilm {
-    private List<Film> catalogoFilm;
-
+public class GestoreFilm extends GestoreBase<Film> {
     public GestoreFilm() {
-        this.catalogoFilm = new ArrayList<>();
+        this.listaElementi = new ArrayList<>();
     }
 
-    public void aggiungiFilm(Film film) {
-        catalogoFilm.add(film);
+    @Override
+    public void aggiungiElemento(Film film) {
+        listaElementi.add(film);
     }
 
-    public void rimuoviFilm(Film film) {
-        catalogoFilm.remove(film);
-    }
-
-    public List<Film> getCatalogoFilm() {
-        return catalogoFilm;
+    @Override
+    public void rimuoviElemento(Film film) {
+        listaElementi.remove(film);
     }
 }

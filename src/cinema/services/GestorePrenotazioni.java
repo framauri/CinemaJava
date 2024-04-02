@@ -5,22 +5,18 @@ import cinema.models.Prenotazione;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GestorePrenotazioni {
-    private List<Prenotazione> prenotazioni;
-
+public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
     public GestorePrenotazioni() {
-        this.prenotazioni = new ArrayList<>();
+        this.listaElementi = new ArrayList<>();
     }
 
-    public void effettuaPrenotazione(Prenotazione prenotazione) {
-        prenotazioni.add(prenotazione);
+    @Override
+    public void aggiungiElemento(Prenotazione prenotazione) {
+        listaElementi.add(prenotazione);
     }
 
-    public void cancellaPrenotazione(Prenotazione prenotazione) {
-        prenotazioni.remove(prenotazione);
-    }
-
-    public List<Prenotazione> getPrenotazioni() {
-        return prenotazioni;
+    @Override
+    public void rimuoviElemento(Prenotazione prenotazione) {
+        listaElementi.remove(prenotazione);
     }
 }

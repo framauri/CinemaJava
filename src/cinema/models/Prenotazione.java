@@ -17,45 +17,7 @@ public class Prenotazione {
         this.numeroPosti = numeroPosti;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Spettatore getSpettatore() {
-        return spettatore;
-    }
-
-    public void setSpettatore(Spettatore spettatore) {
-        this.spettatore = spettatore;
-    }
-
-    public Film getFilm() {
-        return film;
-    }
-
-    public void setFilm(Film film) {
-        this.film = film;
-    }
-
-    public Sala getSala() {
-        return sala;
-    }
-
-    public void setSala(Sala sala) {
-        this.sala = sala;
-    }
-
-    public int getNumeroPosti() {
-        return numeroPosti;
-    }
-
-    public void setNumeroPosti(int numeroPosti) {
-        this.numeroPosti = numeroPosti;
-    }
+    // Metodi getter e setter per altre variabili omessi per brevità
 
     @Override
     public String toString() {

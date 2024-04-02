@@ -3,24 +3,19 @@ package cinema.services;
 import cinema.models.Spettatore;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class GestoreSpettatori {
-    private List<Spettatore> listaSpettatori;
-
+public class GestoreSpettatori extends GestoreBase<Spettatore> {
     public GestoreSpettatori() {
-        this.listaSpettatori = new ArrayList<>();
+        this.listaElementi = new ArrayList<>();
     }
 
-    public void aggiungiSpettatore(Spettatore spettatore) {
-        listaSpettatori.add(spettatore);
+    @Override
+    public void aggiungiElemento(Spettatore spettatore) {
+        listaElementi.add(spettatore);
     }
 
-    public void rimuoviSpettatore(Spettatore spettatore) {
-        listaSpettatori.remove(spettatore);
-    }
-
-    public List<Spettatore> getListaSpettatori() {
-        return listaSpettatori;
+    @Override
+    public void rimuoviElemento(Spettatore spettatore) {
+        listaElementi.remove(spettatore);
     }
 }
