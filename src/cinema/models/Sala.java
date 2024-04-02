@@ -7,12 +7,14 @@ public class Sala {
     private int capacita;
     private static int numeroSaleTotali = 0;
 
+    public Sala () {
+    }
+
     public Sala(int numero, int capacita) {
         this.numero = numero;
         this.capacita = capacita;
         numeroSaleTotali++; //Incremento del numero totale di sale al momento della creazione di una nuova sala
     }
-
 
     public int getNumero () {
         return numero;

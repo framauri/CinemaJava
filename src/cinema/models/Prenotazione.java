@@ -9,6 +9,9 @@ public class Prenotazione {
     private Sala sala;
     private int numeroPosti;
 
+    public Prenotazione () {
+    }
+
     public Prenotazione(int id, Spettatore spettatore, Film film, Sala sala, int numeroPosti) {
         this.id = id;
         this.spettatore = spettatore;
@@ -17,7 +20,45 @@ public class Prenotazione {
         this.numeroPosti = numeroPosti;
     }
 
-    // Metodi getter e setter per altre variabili omessi per brevità
+    public int getId () {
+        return id;
+    }
+
+    public void setId ( int id ) {
+        this.id = id;
+    }
+
+    public Spettatore getSpettatore () {
+        return spettatore;
+    }
+
+    public void setSpettatore ( Spettatore spettatore ) {
+        this.spettatore = spettatore;
+    }
+
+    public Film getFilm () {
+        return film;
+    }
+
+    public void setFilm ( Film film ) {
+        this.film = film;
+    }
+
+    public Sala getSala () {
+        return sala;
+    }
+
+    public void setSala ( Sala sala ) {
+        this.sala = sala;
+    }
+
+    public int getNumeroPosti () {
+        return numeroPosti;
+    }
+
+    public void setNumeroPosti ( int numeroPosti ) {
+        this.numeroPosti = numeroPosti;
+    }
 
     @Override
     public String toString() {

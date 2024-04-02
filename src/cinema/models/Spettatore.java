@@ -1,9 +1,14 @@
 package cinema.models;
 
+import java.util.Objects;
+
 public class Spettatore {
     private String nome;
     private String cognome;
     private int eta;
+
+    public Spettatore () {
+    }
 
     public Spettatore(String nome, String cognome, int eta) {
         this.nome = nome;
@@ -41,5 +46,18 @@ public class Spettatore {
                 "nome='" + nome + '\'' +
                 ", eta=" + eta +
                 '}';
+    }
+
+    @Override
+    public boolean equals ( Object o ) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Spettatore that = (Spettatore) o;
+        return eta == that.eta && Objects.equals(nome, that.nome) && Objects.equals(cognome, that.cognome);
+    }
+
+    @Override
+    public int hashCode () {
+        return Objects.hash(nome, cognome, eta);
     }
 }

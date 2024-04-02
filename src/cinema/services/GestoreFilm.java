@@ -3,7 +3,6 @@ package cinema.services;
 import cinema.models.Film;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class GestoreFilm extends GestoreBase<Film> {
     public GestoreFilm() {

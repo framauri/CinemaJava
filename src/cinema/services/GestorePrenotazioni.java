@@ -3,7 +3,6 @@ package cinema.services;
 import cinema.models.Prenotazione;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
     public GestorePrenotazioni() {

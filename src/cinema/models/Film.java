@@ -5,7 +5,10 @@ import java.util.Objects;
 public class Film {
     private String titolo;
     private String regista;
-    private int durata; // Durata del film in minuti
+    private int durata; //Durata del film in minuti
+
+    public Film () {
+    }
 
     public Film(String titolo, String regista, int durata) {
         this.titolo = titolo;
