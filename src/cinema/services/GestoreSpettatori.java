@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GestoreSpettatori extends GestoreBase<Spettatore> {
-    public GestoreSpettatori() {
-        this.listaElementi = new ArrayList<>();
-    }
+//    public GestoreSpettatori () {
+//        this.listaElementi = new ArrayList<>();
+//    }
 
 
-    public void aggiungiElemento (Spettatore spettatore) {
+    public void aggiungiElemento ( Spettatore spettatore ) {
         Scanner tastiera2 = new Scanner(System.in);
         System.out.println("Buongiorno, inserisci i tuoi dati:");
         String nome1 = tastiera2.nextLine();
@@ -20,10 +20,10 @@ public class GestoreSpettatori extends GestoreBase<Spettatore> {
         spettatore.setNome(nome1);
         spettatore.setCognome(cognome1);
         spettatore.setEta(eta1);
-        listaElementi.add(spettatore);
+        getListaElementi().add(spettatore);
     }
 
-    public void rimuoviElemento(Spettatore spettatore) {
+    public void rimuoviElemento ( Spettatore spettatore ) {
         Scanner tastiera6 = new Scanner(System.in);
         tastiera6.next();
         System.out.println("Inserisci il nome dell'utente da eliminare");
@@ -32,10 +32,16 @@ public class GestoreSpettatori extends GestoreBase<Spettatore> {
         String conomeDaEliminare = tastiera6.nextLine();
         System.out.println("Inserisci l'età dell'utente da eliminare");
         int eta = tastiera6.nextInt();
-        for (int i = 0; i < listaElementi.size(); i++) {
-            if (listaElementi.get(i).getNome().equals(nomeDaEliminare) && listaElementi.get(i).getCognome().equals(conomeDaEliminare) && listaElementi.get(i).getEta()==(eta)) {
-                listaElementi.remove(spettatore);
+        for (int i = 0; i < getListaElementi().size(); i++) {
+            if (getListaElementi().get(i).getNome().equals(nomeDaEliminare) && getListaElementi().get(i).getCognome().equals(conomeDaEliminare) && getListaElementi().get(i).getEta() == (eta)) {
+                getListaElementi().remove(spettatore);
             }
+        }
+    }
+
+    public void mostraLista(){
+        for (Spettatore spettatore : getListaElementi()) {
+            spettatore.toString();
         }
     }
 }

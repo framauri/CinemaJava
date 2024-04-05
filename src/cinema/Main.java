@@ -1,6 +1,7 @@
 package cinema;
 
 import cinema.models.Film;
+import cinema.models.Sala;
 import cinema.models.Spettatore;
 import cinema.services.GestoreFilm;
 import cinema.services.GestoreSpettatori;
@@ -11,6 +12,9 @@ import java.util.Scanner;
 public class Main {
     public static Spettatore spettatore = new Spettatore();
     public static Film film = new Film();
+    public static Sala sala1 = new Sala(1,100);
+    public static Sala sala2 = new Sala(2,150);
+
     //public static Prenotazione prenotazione = new Spettatore();
     public static void main(String[] args) {
         boolean exit = true;
