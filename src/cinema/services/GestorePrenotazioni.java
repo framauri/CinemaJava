@@ -1,6 +1,7 @@
 package cinema.services;
 
 import cinema.models.Prenotazione;
+import cinema.models.Spettatore;
 
 import java.util.ArrayList;
 
@@ -9,8 +10,7 @@ public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
         this.listaElementi = new ArrayList<>();
     }
 
-    @Override
-    public void aggiungiElemento(Prenotazione prenotazione) {
+    public void aggiungiElemento ( Prenotazione prenotazione ) {
         listaElementi.add(prenotazione);
     }
 

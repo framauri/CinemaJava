@@ -1,6 +1,7 @@
 package cinema.services;
 
 import cinema.models.Film;
+import cinema.models.Spettatore;
 
 import java.util.ArrayList;
 
@@ -9,8 +10,7 @@ public class GestoreFilm extends GestoreBase<Film> {
         this.listaElementi = new ArrayList<>();
     }
 
-    @Override
-    public void aggiungiElemento(Film film) {
+    public void aggiungiElemento ( Film film ) {
         listaElementi.add(film);
     }
 
