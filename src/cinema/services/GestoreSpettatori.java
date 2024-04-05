@@ -10,20 +10,32 @@ public class GestoreSpettatori extends GestoreBase<Spettatore> {
         this.listaElementi = new ArrayList<>();
     }
 
-    public void aggiungiElemento ( Spettatore spettatore ) {
+
+    public void aggiungiElemento (Spettatore spettatore) {
         Scanner tastiera2 = new Scanner(System.in);
         System.out.println("Buongiorno, inserisci i tuoi dati:");
         String nome1 = tastiera2.nextLine();
-        spettatore.setNome(nome1);
         String cognome1 = tastiera2.nextLine();
-        spettatore.setCognome(cognome1);
         int eta1 = tastiera2.nextInt();
+        spettatore.setNome(nome1);
+        spettatore.setCognome(cognome1);
         spettatore.setEta(eta1);
         listaElementi.add(spettatore);
     }
 
-    @Override
     public void rimuoviElemento(Spettatore spettatore) {
-        listaElementi.remove(spettatore);
+        Scanner tastiera6 = new Scanner(System.in);
+        tastiera6.next();
+        System.out.println("Inserisci il nome dell'utente da eliminare");
+        String nomeDaEliminare = tastiera6.nextLine();
+        System.out.println("Inserisci il cognome dell'utente da eliminare");
+        String conomeDaEliminare = tastiera6.nextLine();
+        System.out.println("Inserisci l'età dell'utente da eliminare");
+        int eta = tastiera6.nextInt();
+        for (int i = 0; i < listaElementi.size(); i++) {
+            if (listaElementi.get(i).getNome().equals(nomeDaEliminare) && listaElementi.get(i).getCognome().equals(conomeDaEliminare) && listaElementi.get(i).getEta()==(eta)) {
+                listaElementi.remove(spettatore);
+            }
+        }
     }
 }

@@ -1,15 +1,17 @@
 package cinema;
 
-import cinema.models.Pagamento;
-import cinema.models.PagamentoCarta;
+import cinema.models.Film;
 import cinema.models.Spettatore;
 import cinema.services.GestoreFilm;
-import cinema.services.GestorePrenotazioni;
 import cinema.services.GestoreSpettatori;
 
 import java.util.Scanner;
 
+
 public class Main {
+    public static Spettatore spettatore = new Spettatore();
+    public static Film film = new Film();
+    //public static Prenotazione prenotazione = new Spettatore();
     public static void main(String[] args) {
         boolean exit = true;
         while(exit){
@@ -30,16 +32,19 @@ public class Main {
                     //CoseDaFare.delMark();
                     break;
                 case "4":
-                    System.out.println("Hai selezionato 'visualizzare i voti'");
-                    //CoseDaFare.printMark();
+                    System.out.println("Hai selezionato 'visualizzare i voti di una materia'");
+                    GestoreSpettatori g = new GestoreSpettatori();
+                    g.aggiungiElemento(spettatore);;
                     break;
                 case "5":
-                    System.out.println("Hai selezionato 'visualizzare i voti di una materia'");
-                    //GestoreSpettatori.aggiungiElemento();
+                    System.out.println("Hai selezionato 'visualizzare i voti insufficienti'");
+                    GestoreFilm gf = new GestoreFilm();
+                    gf.aggiungiElemento(film);
                     break;
                 case "6":
                     System.out.println("Hai selezionato 'visualizzare i voti insufficienti'");
-                    //PagamentoCarta.effettuaPagamento(21.1);
+                    GestoreFilm gfd = new GestoreFilm();
+                    gfd.rimuoviElemento(film);
                     break;
                 case "7":
                     System.out.println("Hai selezionato 'Uscire'");

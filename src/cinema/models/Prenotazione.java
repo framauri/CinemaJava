@@ -12,8 +12,8 @@ public class Prenotazione {
     public Prenotazione () {
     }
 
-    public Prenotazione(int id, Spettatore spettatore, Film film, Sala sala, int numeroPosti) {
-        this.id = id;
+    public Prenotazione(Spettatore spettatore, Film film, Sala sala, int numeroPosti) {
+        id++;
         this.spettatore = spettatore;
         this.film = film;
         this.sala = sala;

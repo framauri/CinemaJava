@@ -11,6 +11,7 @@ public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
     }
 
     public void aggiungiElemento ( Prenotazione prenotazione ) {
+
         listaElementi.add(prenotazione);
     }
 
