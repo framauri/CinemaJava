@@ -11,8 +11,8 @@ public class GestoreFilm extends GestoreBase<Film> {
     public void aggiungiElemento () {
         Scanner tastiera4 = new Scanner(System.in);
         System.out.println("Buongiorno, inserisci i dati del film:");
-        String titolo1 = tastiera4.nextLine();
-        String regista1 = tastiera4.nextLine();
+        String titolo1 = tastiera4.next();
+        String regista1 = tastiera4.next();
         int durata1 = tastiera4.nextInt();
         Film film = new Film(titolo1, regista1, durata1);
         getListaElementi().add(film);

@@ -13,12 +13,10 @@ import java.util.Scanner;
 
 
 public class Main {
-    public static Spettatore spettatore = new Spettatore();
-    public static Film film = new Film();
-    public static Prenotazione prenotazione = new Prenotazione();
 
     public static Sala sala1 = new Sala(1,100);
     public static Sala sala2 = new Sala(2,150);
+    static Sala[] arraySale = {sala1, sala2};
 
     //public static Prenotazione prenotazione = new Spettatore();
     public static void main(String[] args) {
@@ -42,7 +40,7 @@ public class Main {
 
                 case "3":
                     System.out.println("Hai selezionato 'creare una prenotazione'");
-                    gestorePrenotazioni.aggiungiElemento(gestoreSpettatori, gestoreFilm);
+                    gestorePrenotazioni.aggiungiElemento(gestoreSpettatori, gestoreFilm, arraySale);
                     break;
 
                 case "4":
@@ -97,9 +95,9 @@ public class Main {
         System.out.println("4 - Eliminare un utente");
         System.out.println("5 - Eliminare un film");
         System.out.println("6 - Eliminare una prenotazione");
-        System.out.println("4 - Mostrare lista utenti");
-        System.out.println("5 - Mostrare lista film");
-        System.out.println("6 - Mostrare lista prenotazioni");
+        System.out.println("7 - Mostrare lista utenti");
+        System.out.println("8 - Mostrare lista film");
+        System.out.println("9 - Mostrare lista prenotazioni");
         System.out.println("10 - Uscita");
         System.out.println("**********************************");
 

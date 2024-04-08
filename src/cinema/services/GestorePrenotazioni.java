@@ -2,6 +2,7 @@ package cinema.services;
 
 import cinema.models.Film;
 import cinema.models.Prenotazione;
+import cinema.models.Sala;
 import cinema.models.Spettatore;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class GestorePrenotazioni {
 
     private ArrayList<Prenotazione> listaElementi = new ArrayList<Prenotazione>();
 
-    public void aggiungiElemento (GestoreSpettatori g, GestoreFilm f) {
+    public void aggiungiElemento (GestoreSpettatori g, GestoreFilm f, Sala[] arraySale) {
         Scanner tastiera7 = new Scanner(System.in);
         System.out.println("Buongiorno, creiamo una prenotazione:");
         System.out.println("Inserisci il tuo ID utente: ");
@@ -29,15 +30,26 @@ public class GestorePrenotazioni {
         System.out.println("Inserisci il film che desideri vedere: ");
         String nomeF = tastiera8.nextLine();
         for (Film film : f.getListaElementi()) {
-            if (film.getTitolo() == nomeF) {
+            if (film.getTitolo().equals(nomeF)) {
                 p.setFilm(film);
                 break;
             }
         }
 
+        Scanner tastiera9 = new Scanner(System.in);
+        System.out.println("Sale disponibili:");
+        for (Sala s : arraySale) {
+            System.out.println(s.getNumero());
+        }
         System.out.println("Inserisci la sala: ");
-        int numSala = tastiera7.nextInt();
-        //p.setSala(numSala);
+        int numSala = tastiera9.nextInt();
+        for (Sala sa : arraySale) {
+            if (sa.getNumero() == numSala && sa.getCapacita()>0) {
+                p.setSala(sa);
+                sa.setCapacita(sa.getCapacita() - 1);
+                break;
+            }
+        }
 
         System.out.println("Prenotazione creata con successo!");
     }
@@ -60,7 +72,7 @@ public class GestorePrenotazioni {
 
     public void mostraLista(){
         for (Prenotazione prenotazione : getListaElementi()) {
-            System.out.println(prenotazione);
+            System.out.println(prenotazione.toString());
         }
     }
 }

@@ -11,8 +11,8 @@ public class GestoreSpettatori extends GestoreBase<Spettatore> {
     public void aggiungiElemento () {
         Scanner tastiera2 = new Scanner(System.in);
         System.out.println("Buongiorno, inserisci i tuoi dati:");
-        String nome1 = tastiera2.nextLine();
-        String cognome1 = tastiera2.nextLine();
+        String nome1 = tastiera2.next();
+        String cognome1 = tastiera2.next();
         int eta1 = tastiera2.nextInt();
         Spettatore spettatore = new Spettatore(nome1, cognome1, eta1);
         System.out.println("Utente creato con successo!");
@@ -33,7 +33,6 @@ public class GestoreSpettatori extends GestoreBase<Spettatore> {
     }
 
     public void mostraLista(){
-        System.out.println("!!!!!!!!!!!");
         for (Spettatore spettatore : getListaElementi()) {
             System.out.println(spettatore);
         }
