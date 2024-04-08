@@ -1,61 +1,87 @@
 package cinema;
 
 import cinema.models.Film;
+import cinema.models.Prenotazione;
 import cinema.models.Sala;
 import cinema.models.Spettatore;
 import cinema.services.GestoreFilm;
+import cinema.services.GestorePrenotazioni;
 import cinema.services.GestoreSpettatori;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Main {
     public static Spettatore spettatore = new Spettatore();
     public static Film film = new Film();
+    public static Prenotazione prenotazione = new Prenotazione();
+
     public static Sala sala1 = new Sala(1,100);
     public static Sala sala2 = new Sala(2,150);
 
     //public static Prenotazione prenotazione = new Spettatore();
     public static void main(String[] args) {
+        GestoreSpettatori gestoreSpettatori = new GestoreSpettatori();
+        GestoreFilm gestoreFilm = new GestoreFilm();
+        GestorePrenotazioni gestorePrenotazioni = new GestorePrenotazioni();
+
         boolean exit = true;
         while(exit){
             String scelta = menu();
             switch(scelta) {
                 case "1":
-                    System.out.println("Hai selezionato 'inserire un voto'");
-
+                    System.out.println("Hai selezionato 'creare un utente'");
+                    gestoreSpettatori.aggiungiElemento();
                     break;
 
                 case "2":
-                    System.out.println("Hai selezionato 'inserire piu voti'");
-                    //CoseDaFare.massiveMarks();
+                    System.out.println("Hai selezionato 'creare un film'");
+                    gestoreFilm.aggiungiElemento();
                     break;
 
                 case "3":
-                    System.out.println("Hai selezionato 'eliminare un voto'");
-                    //CoseDaFare.delMark();
+                    System.out.println("Hai selezionato 'creare una prenotazione'");
+                    gestorePrenotazioni.aggiungiElemento(gestoreSpettatori, gestoreFilm);
                     break;
+
                 case "4":
-                    System.out.println("Hai selezionato 'visualizzare i voti di una materia'");
-                    GestoreSpettatori g = new GestoreSpettatori();
-                    g.aggiungiElemento(spettatore);;
+                    System.out.println("Hai selezionato 'eliminare un utente'");
+                    gestoreSpettatori.rimuoviElemento();
+                    gestoreSpettatori.mostraLista();
                     break;
+
                 case "5":
-                    System.out.println("Hai selezionato 'visualizzare i voti insufficienti'");
-                    GestoreFilm gf = new GestoreFilm();
-                    gf.aggiungiElemento(film);
+                    System.out.println("Hai selezionato 'eliminare un film'");
+                    gestoreFilm.rimuoviElemento();
                     break;
+
                 case "6":
-                    System.out.println("Hai selezionato 'visualizzare i voti insufficienti'");
-                    GestoreFilm gfd = new GestoreFilm();
-                    gfd.rimuoviElemento(film);
+                    System.out.println("Hai selezionato 'eliminare una prenotazione'");
+                    gestorePrenotazioni.rimuoviElemento();
                     break;
+
                 case "7":
+                    System.out.println("Hai selezionato 'mostra lista utenti'");
+                    gestoreSpettatori.mostraLista();
+                    break;
+
+                case "8":
+                    System.out.println("Hai selezionato 'mostra lista film'");
+                    gestoreFilm.mostraLista();
+                    break;
+
+                case "9":
+                    System.out.println("Hai selezionato 'mostra lista prenotazioni'");
+                    gestorePrenotazioni.mostraLista();
+                    break;
+
+                case "10":
                     System.out.println("Hai selezionato 'Uscire'");
-                    System.out.println("Helo");
+                    System.out.println("Bye");
                     exit = false;
                 default:
-                    System.out.println("metti un numero da 1 a 7");
+                    System.out.println("Inserisci un numero da 1 a 7");
             }
         }
 
@@ -63,16 +89,19 @@ public class Main {
     public static String menu () {
         Scanner tastiera1 = new Scanner(System.in);
         String scelta;
-        System.out.println("*");
+        System.out.println("**********************************");
         System.out.println("Scegli cosa fare:");
-        System.out.println("inserimento di un singolo voto 1");
-        System.out.println("inserimento di piu' voti 2");
-        System.out.println("eliminazione voto 3");
-        System.out.println("visualizza voti 4");
-        System.out.println("visualizza voti materia 5");
-        System.out.println("visualizza materie con voti insufficienti 6");
-        System.out.println("esci 7");
-        System.out.println("*");
+        System.out.println("1 - Creare un utente");
+        System.out.println("2 - Creare un film");
+        System.out.println("3 - Creare una prenotazione");
+        System.out.println("4 - Eliminare un utente");
+        System.out.println("5 - Eliminare un film");
+        System.out.println("6 - Eliminare una prenotazione");
+        System.out.println("4 - Mostrare lista utenti");
+        System.out.println("5 - Mostrare lista film");
+        System.out.println("6 - Mostrare lista prenotazioni");
+        System.out.println("10 - Uscita");
+        System.out.println("**********************************");
 
         scelta = tastiera1.nextLine();
         //	tastiera1.close();
