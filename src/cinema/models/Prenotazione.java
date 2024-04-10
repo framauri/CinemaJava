@@ -56,9 +56,9 @@ public class Prenotazione {
     public String toString() {
         return "Prenotazione{" +
                 "id=" + id +
-                ", spettatore=" + spettatore +
-                ", film=" + film +
-                ", sala=" + sala +
+                ", spettatore=" + spettatore.toString() +
+                ", film=" + film.toString() +
+                ", sala=" + sala.toString() +
                 '}';
     }
 
@@ -76,5 +76,13 @@ public class Prenotazione {
     @Override
     public int hashCode() {
         return Objects.hash(id, spettatore, film, sala);
+    }
+
+    public String formatoStampa() {
+        return  "---------------------------------" + "\n" +
+                "ID Prenotazione: " + id + "\n"; //+
+//                "Spettatore: " + this.spettatore.formatoStampa() + "\n" +
+//                "Film: " + this.film.formatoStampa() + "\n" +
+//                "Sala: " + this.sala.formatoStampa();
     }
 }

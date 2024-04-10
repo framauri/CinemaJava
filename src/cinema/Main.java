@@ -60,21 +60,26 @@ public class Main {
                     break;
 
                 case "7":
-                    System.out.println("Hai selezionato 'mostra lista utenti'");
+                    System.out.println("Hai selezionato 'mostra lista utenti'");  //se vuota stampare lista vuota
                     gestoreSpettatori.mostraLista();
                     break;
 
                 case "8":
-                    System.out.println("Hai selezionato 'mostra lista film'");
+                    System.out.println("Hai selezionato 'mostra lista film'");  //se vuota stampare lista vuota
                     gestoreFilm.mostraLista();
                     break;
 
                 case "9":
-                    System.out.println("Hai selezionato 'mostra lista prenotazioni'");
+                    System.out.println("Hai selezionato 'mostra lista prenotazioni'");  //non stampa, se vuota stampare lista vuota
                     gestorePrenotazioni.mostraLista();
                     break;
 
                 case "10":
+                    System.out.println("Hai selezionato 'ricerca ID utente'");
+                    gestoreSpettatori.cercaIdSpettatore();
+                    break;
+
+                case "11":
                     System.out.println("Hai selezionato 'Uscire'");
                     System.out.println("Bye");
                     exit = false;
@@ -98,7 +103,8 @@ public class Main {
         System.out.println("7 - Mostrare lista utenti");
         System.out.println("8 - Mostrare lista film");
         System.out.println("9 - Mostrare lista prenotazioni");
-        System.out.println("10 - Uscita");
+        System.out.println("10 - Ricercare ID utente");
+        System.out.println("11 - Uscita");
         System.out.println("**********************************");
 
         scelta = tastiera1.nextLine();

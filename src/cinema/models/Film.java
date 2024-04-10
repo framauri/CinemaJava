@@ -63,4 +63,11 @@ public class Film {
     public int hashCode() {
         return Objects.hash(titolo, regista, durata);
     }
+
+    public String formatoStampa() {
+        return  "---------------------------------" + "\n" +
+                "Titolo: " + titolo + "\n" +
+                "Regista: " + regista + "\n" +
+                "Durata: " + durata + " minuti";
+    }
 }

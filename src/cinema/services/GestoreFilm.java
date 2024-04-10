@@ -8,21 +8,36 @@ import java.util.Scanner;
 
 public class GestoreFilm extends GestoreBase<Film> {
 
-    public void aggiungiElemento () {
+    public void aggiungiElemento() {
         Scanner tastiera4 = new Scanner(System.in);
-        System.out.println("Buongiorno, inserisci i dati del film:");
-        String titolo1 = tastiera4.next();
+        System.out.println("Benvenuto, inserisci i dati del film nel formato  'titolo'");
+        System.out.println("'regista (cognome)'  'durata (min)':");
+        String titolo1 = tastiera4.nextLine();
         String regista1 = tastiera4.next();
         int durata1 = tastiera4.nextInt();
-        Film film = new Film(titolo1, regista1, durata1);
-        getListaElementi().add(film);
+        boolean filmEsistente = false;
+        for (Film film : getListaElementi()) {
+            if (film.getTitolo().equals(titolo1) && film.getRegista().equals(regista1) && film.getDurata() == durata1) {
+                filmEsistente = true;
+                break;
+            }
+        }
+
+        if (filmEsistente) {
+            System.out.println("Questo film esiste già!");
+        } else {
+            Film film = new Film(titolo1, regista1, durata1);
+            System.out.println("Film creato con successo!");
+            getListaElementi().add(film);
+        }
     }
+
 
     @Override
     public void rimuoviElemento() {
         Scanner tastiera5 = new Scanner(System.in);
         tastiera5.next();
-        System.out.println("Inserisci il nome del film da eliminare");
+        System.out.println("Inserisci il nome del film da eliminare...");
         String filmDaEliminare = tastiera5.nextLine();
         for (int i = 0; i < getListaElementi().size(); i++) {
             if (getListaElementi().get(i).getTitolo().equals(filmDaEliminare)) {
@@ -31,9 +46,9 @@ public class GestoreFilm extends GestoreBase<Film> {
         }
     }
 
-    public void mostraLista(){
+    public void mostraLista() {
         for (Film film : getListaElementi()) {
-            System.out.println(film.toString());
+            System.out.println(film.formatoStampa());
         }
     }
 

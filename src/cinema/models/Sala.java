@@ -62,4 +62,10 @@ public class Sala {
     public int hashCode() {
         return Objects.hash(numero, capacita);
     }
+
+    public String formatoStampa() {
+        return  "---------------------------------" + "\n" +
+                "Numero Sala: " + numero + "\n" +
+                "Capacità Sala: " + capacita;
+    }
 }

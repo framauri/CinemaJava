@@ -73,4 +73,12 @@ public class Spettatore {
     public int hashCode () {
         return Objects.hash(id, nome, cognome, eta);
     }
+
+    public String formatoStampa() {
+        return  "---------------------------------" + "\n" +
+                "ID Spettatore: " + id + "\n" +
+                "Nome: " + nome + "\n" +
+                "Cognome: " + cognome + "\n" +
+                "Età: " + eta;
+    }
 }
