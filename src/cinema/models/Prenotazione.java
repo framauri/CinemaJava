@@ -15,6 +15,7 @@ public class Prenotazione {
     private Sala sala;
 
     public Prenotazione () {
+        this(null, null, null);
     }
 
     public Prenotazione(Spettatore spettatore, Film film, Sala sala) {

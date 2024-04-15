@@ -5,7 +5,6 @@ import java.util.Objects;
 public class Sala {
     private int numero;
     private int capacita;
-    private static int numeroSaleTotali = 0;
 
     public Sala () {
     }
@@ -13,7 +12,6 @@ public class Sala {
     public Sala(int numero, int capacita) {
         this.numero = numero;
         this.capacita = capacita;
-        numeroSaleTotali++; //Incremento del numero totale di sale al momento della creazione di una nuova sala
     }
 
     public int getNumero () {
@@ -30,14 +28,6 @@ public class Sala {
 
     public void setCapacita ( int capacita ) {
         this.capacita = capacita;
-    }
-
-    public static int getNumeroSaleTotali() {
-        return numeroSaleTotali;
-    }
-
-    public static void setNumeroSaleTotali ( int numeroSaleTotali ) {
-        Sala.numeroSaleTotali = numeroSaleTotali;
     }
 
 
@@ -65,7 +55,6 @@ public class Sala {
 
     public String formatoStampa() {
         return  "---------------------------------" + "\n" +
-                "Numero Sala: " + numero + "\n" +
-                "Capacità Sala: " + capacita;
+                "Numero Sala: " + numero;
     }
 }

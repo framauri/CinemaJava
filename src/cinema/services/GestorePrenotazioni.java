@@ -5,18 +5,37 @@ import cinema.models.Prenotazione;
 import cinema.models.Sala;
 import cinema.models.Spettatore;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
 
-   //private ArrayList<Prenotazione> listaElementi = new ArrayList<Prenotazione>();
-
     public void aggiungiElemento (GestoreSpettatori g, GestoreFilm f, Sala[] arraySale) {
         Scanner tastiera7 = new Scanner(System.in);
         System.out.println("Benvenuto, creiamo una prenotazione:");
-        System.out.println("Inserisci l'ID utente: ");
-        int idUtente = tastiera7.nextInt();
+
+        int idUtente = 0;
+        boolean inputCorretto = false;
+
+        while (!inputCorretto) {
+            System.out.println("Inserisci l'ID utente: ");
+            try {
+                idUtente = tastiera7.nextInt();
+                for (Spettatore ut : g.getListaElementi()) {
+                    if (ut.getId() == idUtente) {
+                        System.out.println("ID valido");
+                        inputCorretto = true;
+                        break;
+                    }
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Errore: devi inserire un numero intero.");
+                tastiera7.next();
+            }
+        }
+
         Prenotazione p = new Prenotazione();
         //ricerca utente per id
         for (Spettatore ut : g.getListaElementi()) {
@@ -86,7 +105,7 @@ public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
 
     public void mostraLista() {
         for (Prenotazione prenotazione : getListaElementi()) {
-            System.out.println(prenotazione.formatoStampa());// + prenotazione.getSpettatore().formatoStampa() + prenotazione.getFilm().formatoStampa() + prenotazione.getSala().formatoStampa());
+            System.out.println(prenotazione.formatoStampa());
         }
     }
 }

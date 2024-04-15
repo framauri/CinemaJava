@@ -18,7 +18,6 @@ public class Main {
     public static Sala sala2 = new Sala(2,150);
     static Sala[] arraySale = {sala1, sala2};
 
-    //public static Prenotazione prenotazione = new Spettatore();
     public static void main(String[] args) {
         GestoreSpettatori gestoreSpettatori = new GestoreSpettatori();
         GestoreFilm gestoreFilm = new GestoreFilm();
@@ -70,7 +69,7 @@ public class Main {
                     break;
 
                 case "9":
-                    System.out.println("Hai selezionato 'mostra lista prenotazioni'");  //non stampa, se vuota stampare lista vuota
+                    System.out.println("Hai selezionato 'mostra lista prenotazioni'");  //se vuota stampare lista vuota
                     gestorePrenotazioni.mostraLista();
                     break;
 
