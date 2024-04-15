@@ -2,6 +2,11 @@ package cinema.models;
 
 import java.util.Objects;
 
+/**
+ * Classe Prenotazione
+ * Classe che definisce la struttura di una prenotazione
+ */
+
 public class Prenotazione {
     private static int maxId;
     private int id;
@@ -12,7 +17,7 @@ public class Prenotazione {
     public Prenotazione () {
     }
 
-    public Prenotazione(Spettatore spettatore, Film film, Sala sala, int numeroPosti) {
+    public Prenotazione(Spettatore spettatore, Film film, Sala sala) {
         maxId++;
         this.id = maxId;
         this.spettatore = spettatore;
@@ -78,11 +83,16 @@ public class Prenotazione {
         return Objects.hash(id, spettatore, film, sala);
     }
 
+    /**
+     * Metodo formatoStampa
+     * Metodo usato da GestorePrenotazioni.mostraLista() per migliorare la stampa a terminale dei dati di una prenotazione
+     * @return titolo regista durata
+     */
     public String formatoStampa() {
         return  "---------------------------------" + "\n" +
-                "ID Prenotazione: " + id + "\n"; //+
-//                "Spettatore: " + this.spettatore.formatoStampa() + "\n" +
-//                "Film: " + this.film.formatoStampa() + "\n" +
-//                "Sala: " + this.sala.formatoStampa();
+                "ID Prenotazione: " + id + "\n" +
+                "Spettatore: " + this.spettatore.formatoStampa() + "\n" +
+                "Film: " + this.film.formatoStampa() + "\n" +
+                "Sala: " + this.sala.formatoStampa();
     }
 }

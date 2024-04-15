@@ -2,6 +2,11 @@ package cinema.models;
 
 import java.util.Objects;
 
+/**
+ * Classe Film
+ * Classe che definisce la struttura di un film
+ */
+
 public class Film {
     private String titolo;
     private String regista;
@@ -64,6 +69,11 @@ public class Film {
         return Objects.hash(titolo, regista, durata);
     }
 
+    /**
+     * Metodo formatoStampa
+     * Metodo usato da GestoreFilm.mostraLista() per migliorare la stampa a terminale dei dati di un film
+     * @return titolo regista durata
+     */
     public String formatoStampa() {
         return  "---------------------------------" + "\n" +
                 "Titolo: " + titolo + "\n" +

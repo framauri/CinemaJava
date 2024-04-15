@@ -8,9 +8,9 @@ import cinema.models.Spettatore;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class GestorePrenotazioni {
+public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
 
-    private ArrayList<Prenotazione> listaElementi = new ArrayList<Prenotazione>();
+   //private ArrayList<Prenotazione> listaElementi = new ArrayList<Prenotazione>();
 
     public void aggiungiElemento (GestoreSpettatori g, GestoreFilm f, Sala[] arraySale) {
         Scanner tastiera7 = new Scanner(System.in);
@@ -62,8 +62,14 @@ public class GestorePrenotazioni {
 
         if(p.getSpettatore().getId() != 0 && p.getFilm().getTitolo() != null && p.getSala().getNumero() != 0){
             //getnum di sala genera excp se non esiste sala
+            getListaElementi().add(p);
             System.out.println("Prenotazione creata con successo!");
         }
+    }
+
+    @Override
+    public void aggiungiElemento () {
+
     }
 
     public void rimuoviElemento() {
@@ -78,13 +84,9 @@ public class GestorePrenotazioni {
         }
     }
 
-    public ArrayList<Prenotazione> getListaElementi () {
-        return listaElementi;
-    }
-
     public void mostraLista() {
         for (Prenotazione prenotazione : getListaElementi()) {
-            System.out.println(prenotazione.formatoStampa() + prenotazione.getSpettatore().formatoStampa() + prenotazione.getFilm().formatoStampa() + prenotazione.getSala().formatoStampa());
+            System.out.println(prenotazione.formatoStampa());// + prenotazione.getSpettatore().formatoStampa() + prenotazione.getFilm().formatoStampa() + prenotazione.getSala().formatoStampa());
         }
     }
 }

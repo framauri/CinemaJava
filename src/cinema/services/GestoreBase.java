@@ -15,4 +15,5 @@ public abstract class GestoreBase<T> implements Interfaccia<T> {
     public void setListaElementi ( ArrayList<T> listaElementi ) {
         this.listaElementi = listaElementi;
     }
+
 }
