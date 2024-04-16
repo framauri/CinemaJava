@@ -47,9 +47,15 @@ public class GestoreFilm extends GestoreBase<Film> {
     }
 
     public void mostraLista() {
-        for (Film film : getListaElementi()) {
-            System.out.println(film.formatoStampa());
+        if (getListaElementi().isEmpty()) {
+            System.out.println("Lista vuota!");
         }
+        else {
+            for (Film film : getListaElementi()) {
+                System.out.println(film.formatoStampa());
+            }
+        }
+
     }
 
 }

@@ -1,23 +1,31 @@
 package cinema.models;
 
+import java.util.LinkedList;
 import java.util.Objects;
+import java.util.Queue;
 
 public class Spettatore {
-    private static int maxId;
+    private static int maxId = 0;
     private int id;
     private String nome;
     private String cognome;
     private int eta;
+    public static Queue<Integer> availableIds = new LinkedList<>();
+
 
     public Spettatore () {
     }
 
     public Spettatore(String nome, String cognome, int eta) {
-        maxId++;
-        this.id=maxId;
         this.nome = nome;
         this.cognome = cognome;
         this.eta = eta;
+        if (!availableIds.isEmpty()) {
+            this.id = availableIds.poll(); // Prendi un ID disponibile dalla coda
+        } else {
+            maxId++;
+            this.id = maxId;
+        }
     }
 
     public int getId () {
@@ -57,6 +65,7 @@ public class Spettatore {
         return "Spettatore{" +
                 "id=" + id +
                 "nome='" + nome + '\'' +
+                "cognome='" + cognome + '\'' +
                 ", eta=" + eta +
                 '}';
     }

@@ -8,9 +8,13 @@ import cinema.models.Spettatore;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
+
+    Prenotazione p = new Prenotazione();
+
 
     public void aggiungiElemento (GestoreSpettatori g, GestoreFilm f, Sala[] arraySale) {
         Scanner tastiera7 = new Scanner(System.in);
@@ -19,43 +23,75 @@ public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
         int idUtente = 0;
         boolean inputCorretto = false;
 
-        while (!inputCorretto) {
-            System.out.println("Inserisci l'ID utente: ");
-            try {
-                idUtente = tastiera7.nextInt();
-                for (Spettatore ut : g.getListaElementi()) {
-                    if (ut.getId() == idUtente) {
-                        System.out.println("ID valido");
-                        inputCorretto = true;
-                        break;
+        if (!g.getListaElementi().isEmpty()) {
+            while (!inputCorretto) {
+                System.out.println("Inserisci l'ID utente: ");
+                try {
+                    idUtente = tastiera7.nextInt();
+                    for (Spettatore ut : g.getListaElementi()) {
+                        if (ut.getId() == idUtente) {
+                            System.out.println("ID valido");
+                            inputCorretto = true;
+                            break;
+                        }
                     }
+                } catch (InputMismatchException e) {
+                    System.out.println("Errore: devi inserire un numero intero.");
+                    tastiera7.next();
                 }
-            } catch (InputMismatchException e) {
-                System.out.println("Errore: devi inserire un numero intero.");
-                tastiera7.next();
             }
         }
+        else{
+            System.out.println("Lista vuota! Devi prima creare un utenza!");
+            g.aggiungiElemento();
 
-        Prenotazione p = new Prenotazione();
+            p.setSpettatore(g.getListaElementi().getFirst());
+        }
+
         //ricerca utente per id
-        for (Spettatore ut : g.getListaElementi()) {
-            if (ut.getId() == idUtente) {
-                p.setSpettatore(ut);
-                break;
+//        for (Spettatore ut : g.getListaElementi()) {
+//            if (ut.getId() == idUtente) {
+//                p.setSpettatore(ut);
+//                break;
+//            }
+//        }
+
+        String nomeF = " ";
+        boolean inputCorrettoFilm = false;
+
+        if (!f.getListaElementi().isEmpty()) {
+            while (!inputCorrettoFilm) {
+                Scanner tastiera8 = new Scanner(System.in);
+                System.out.println("Inserisci il titolo del film scelto: ");
+                f.mostraLista();
+                try {
+                    nomeF = tastiera8.nextLine();
+                    for (Film film : f.getListaElementi()) {
+                        if (Objects.equals(film.getTitolo(), nomeF)) {
+                            System.out.println("Film esistente");
+                            inputCorrettoFilm = true;
+                            break;
+                        }
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Errore: devi inserire un film esistente.");
+                }
             }
         }
+        else{
+            System.out.println("Lista vuota! Devi prima creare un film!");
+            f.aggiungiElemento();
 
-        Scanner tastiera8 = new Scanner(System.in);
-        System.out.println("Inserisci il titolo del film scelto: ");
-        f.mostraLista();
-        String nomeF = tastiera8.nextLine();
-        for (Film film : f.getListaElementi()) {
-            if (film.getTitolo().equals(nomeF)) {
-                p.setFilm(film);
-                break;
-            }
+            p.setFilm(f.getListaElementi().getFirst());
         }
 
+        //ricerca film per titolo
+//        for (Film film : f.getListaElementi()) {
+//            if (film.getTitolo().equals(nomeF)) {
+//                p.setFilm(film);
+//                break;
+//            }
+//        }
         Scanner tastiera9 = new Scanner(System.in);
         System.out.println("Sale disponibili:");
         for (Sala s : arraySale) {
@@ -63,27 +99,27 @@ public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
         }
 
         boolean salaTrovata = false;
-        System.out.println("Inserisci il numero della sala:");
-        int numSala = tastiera9.nextInt();
-        for (Sala sa : arraySale) {
-            if (sa.getNumero() == numSala && sa.getCapacita() > 0) {
-                p.setSala(sa);
-                sa.setCapacita(sa.getCapacita() - 1);
-                salaTrovata = true;
-                break; //Esci dal ciclo una volta trovata una sala valida
+        while (!salaTrovata){
+            try{
+                System.out.println("Inserisci il numero della sala:");
+                int numSala = tastiera9.nextInt();
+                for (Sala sa : arraySale) {
+                    if (sa.getNumero() == numSala && sa.getCapacita() > 0) {
+                        p.setSala(sa);
+                        sa.setCapacita(sa.getCapacita() - 1);
+                        salaTrovata = true;
+                        break; //Esci dal ciclo una volta trovata una sala valida
+                    }
+                }
+            }
+            catch (Exception e){
+                System.out.println("Errore: devi inserire una sala esistente.");
             }
         }
 
-        if (!salaTrovata) {
-            System.out.println("Sala non esistente o posti esauriti!");
-        }
-
-
-        if(p.getSpettatore().getId() != 0 && p.getFilm().getTitolo() != null && p.getSala().getNumero() != 0){
-            //getnum di sala genera excp se non esiste sala
             getListaElementi().add(p);
             System.out.println("Prenotazione creata con successo!");
-        }
+
     }
 
     @Override
@@ -104,8 +140,14 @@ public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
     }
 
     public void mostraLista() {
-        for (Prenotazione prenotazione : getListaElementi()) {
-            System.out.println(prenotazione.formatoStampa());
+        if (getListaElementi().isEmpty()) {
+            System.out.println("Lista vuota!");
         }
+        else{
+            for (Prenotazione prenotazione : getListaElementi()) {
+                System.out.println(prenotazione.formatoStampa());
+            }
+        }
+
     }
 }

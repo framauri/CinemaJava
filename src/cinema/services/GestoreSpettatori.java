@@ -6,6 +6,8 @@ import cinema.models.Spettatore;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static cinema.models.Spettatore.availableIds;
+
 public class GestoreSpettatori extends GestoreBase<Spettatore> {
 
 
@@ -41,13 +43,19 @@ public class GestoreSpettatori extends GestoreBase<Spettatore> {
         for (int i = 0; i < getListaElementi().size(); i++) {
             if (getListaElementi().get(i).getId() == (idDaEliminare)) {
                 getListaElementi().remove(getListaElementi().get(i));
+                availableIds.offer(idDaEliminare); // Aggiungi l'ID eliminato alla coda degli ID disponibili
             }
         }
     }
 
     public void mostraLista() {
-        for (Spettatore spettatore : getListaElementi()) {
-            System.out.println(spettatore.formatoStampa());
+        if (getListaElementi().isEmpty()) {
+            System.out.println("Lista vuota!");
+        }
+        else{
+            for (Spettatore spettatore : getListaElementi()) {
+                System.out.println(spettatore.formatoStampa());
+            }
         }
     }
 

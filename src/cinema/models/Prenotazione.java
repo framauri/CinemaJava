@@ -87,13 +87,13 @@ public class Prenotazione {
     /**
      * Metodo formatoStampa
      * Metodo usato da GestorePrenotazioni.mostraLista() per migliorare la stampa a terminale dei dati di una prenotazione
-     * @return titolo regista durata
+     * @return titolo regista durata     ////////
      */
     public String formatoStampa() {
         return  "---------------------------------" + "\n" +
                 "ID Prenotazione: " + id + "\n" +
-                "Spettatore: " + this.spettatore.formatoStampa() + "\n" +
-                "Film: " + this.film.formatoStampa() + "\n" +
-                "Sala: " + this.sala.formatoStampa();
+                "Spettatore: " + spettatore.formatoStampa() + "\n" +
+                "Film: " + film.formatoStampa() + "\n" +
+                "Sala: " + sala.formatoStampa();
     }
 }
