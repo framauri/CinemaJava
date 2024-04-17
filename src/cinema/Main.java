@@ -1,14 +1,9 @@
 package cinema;
 
-import cinema.models.Film;
-import cinema.models.Prenotazione;
 import cinema.models.Sala;
-import cinema.models.Spettatore;
 import cinema.services.GestoreFilm;
 import cinema.services.GestorePrenotazioni;
 import cinema.services.GestoreSpettatori;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 

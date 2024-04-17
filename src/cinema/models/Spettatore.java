@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
 
-public class Spettatore {
+public class Spettatore implements Comparable<Spettatore> {
     private static int maxId = 0;
     private int id;
     private String nome;
@@ -81,6 +81,11 @@ public class Spettatore {
     @Override
     public int hashCode () {
         return Objects.hash(id, nome, cognome, eta);
+    }
+
+    public int compareTo(Spettatore altro) {
+        //Ordina gli spettatori in base all'ID
+        return Integer.compare(this.id, altro.getId());
     }
 
     public String formatoStampa() {

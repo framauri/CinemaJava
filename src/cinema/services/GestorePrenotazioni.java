@@ -6,7 +6,6 @@ import cinema.models.Sala;
 import cinema.models.Spettatore;
 
 import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
 

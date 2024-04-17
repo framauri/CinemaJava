@@ -8,13 +8,4 @@ public abstract class GestoreBase<T> implements Interfaccia<T> {
     public ArrayList<T> getListaElementi () {
         return listaElementi;
     }
-
-    public void aggiungiElemento (){
-    }
-
-    public void rimuoviElemento (){
-    }
-
-    public void mostraLista (){
-    }
 }
