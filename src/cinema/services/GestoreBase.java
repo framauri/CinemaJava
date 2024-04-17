@@ -1,7 +1,5 @@
 package cinema.services;
 
-import cinema.models.Spettatore;
-
 import java.util.ArrayList;
 
 public abstract class GestoreBase<T> implements Interfaccia<T> {
@@ -11,8 +9,12 @@ public abstract class GestoreBase<T> implements Interfaccia<T> {
         return listaElementi;
     }
 
-    public void setListaElementi ( ArrayList<T> listaElementi ) {
-        this.listaElementi = listaElementi;
+    public void aggiungiElemento (){
     }
 
+    public void rimuoviElemento (){
+    }
+
+    public void mostraLista (){
+    }
 }

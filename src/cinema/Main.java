@@ -18,6 +18,7 @@ public class Main {
     public static Sala sala2 = new Sala(2,150);
     static Sala[] arraySale = {sala1, sala2};
 
+
     public static void main(String[] args) {
         GestoreSpettatori gestoreSpettatori = new GestoreSpettatori();
         GestoreFilm gestoreFilm = new GestoreFilm();
@@ -45,31 +46,36 @@ public class Main {
                 case "4":
                     System.out.println("Hai selezionato 'eliminare un utente'");
                     gestoreSpettatori.rimuoviElemento();
+                    System.out.println("Lista utenti rimanenti:");
                     gestoreSpettatori.mostraLista();
                     break;
 
                 case "5":
                     System.out.println("Hai selezionato 'eliminare un film'");
                     gestoreFilm.rimuoviElemento();
+                    System.out.println("Lista film rimanenti:");
+                    gestoreFilm.mostraLista();
                     break;
 
                 case "6":
                     System.out.println("Hai selezionato 'eliminare una prenotazione'");
                     gestorePrenotazioni.rimuoviElemento();
+                    System.out.println("Lista prenotazioni rimanenti:");
+                    gestorePrenotazioni.mostraLista();
                     break;
 
                 case "7":
-                    System.out.println("Hai selezionato 'mostra lista utenti'");  //se vuota stampare lista vuota
+                    System.out.println("Hai selezionato 'mostra lista utenti'");
                     gestoreSpettatori.mostraLista();
                     break;
 
                 case "8":
-                    System.out.println("Hai selezionato 'mostra lista film'");  //se vuota stampare lista vuota
+                    System.out.println("Hai selezionato 'mostra lista film'");
                     gestoreFilm.mostraLista();
                     break;
 
                 case "9":
-                    System.out.println("Hai selezionato 'mostra lista prenotazioni'");  //se vuota stampare lista vuota
+                    System.out.println("Hai selezionato 'mostra lista prenotazioni'");
                     gestorePrenotazioni.mostraLista();
                     break;
 
@@ -91,7 +97,7 @@ public class Main {
     public static String menu () {
         Scanner tastiera1 = new Scanner(System.in);
         String scelta;
-        System.out.println("**********************************");
+        System.out.println("*****************************************");
         System.out.println("Scegli cosa fare:");
         System.out.println("1 - Creare un utente");
         System.out.println("2 - Creare un film");
@@ -104,11 +110,9 @@ public class Main {
         System.out.println("9 - Mostrare lista prenotazioni");
         System.out.println("10 - Ricercare ID utente");
         System.out.println("11 - Uscita");
-        System.out.println("**********************************");
+        System.out.println("*****************************************");
 
         scelta = tastiera1.nextLine();
-        //	tastiera1.close();
         return scelta;
-
     }
 }

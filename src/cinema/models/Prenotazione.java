@@ -8,13 +8,14 @@ import java.util.Objects;
  */
 
 public class Prenotazione {
-    private static int maxId;
+    static int maxId;
     private int id;
     private Spettatore spettatore;
     private Film film;
     private Sala sala;
 
-    public Prenotazione () {
+
+    public Prenotazione() {
         this(null, null, null);
     }
 

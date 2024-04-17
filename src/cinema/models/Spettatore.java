@@ -21,7 +21,7 @@ public class Spettatore {
         this.cognome = cognome;
         this.eta = eta;
         if (!availableIds.isEmpty()) {
-            this.id = availableIds.poll(); // Prendi un ID disponibile dalla coda
+            this.id = availableIds.poll(); //Prende un ID disponibile dalla coda
         } else {
             maxId++;
             this.id = maxId;

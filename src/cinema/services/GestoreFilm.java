@@ -17,7 +17,7 @@ public class GestoreFilm extends GestoreBase<Film> {
         int durata1 = tastiera4.nextInt();
         boolean filmEsistente = false;
         for (Film film : getListaElementi()) {
-            if (film.getTitolo().equals(titolo1) && film.getRegista().equals(regista1) && film.getDurata() == durata1) {
+            if (film.getTitolo().equalsIgnoreCase(titolo1) && film.getRegista().equalsIgnoreCase(regista1) && film.getDurata() == durata1) {
                 filmEsistente = true;
                 break;
             }

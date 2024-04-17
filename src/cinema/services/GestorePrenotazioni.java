@@ -5,22 +5,22 @@ import cinema.models.Prenotazione;
 import cinema.models.Sala;
 import cinema.models.Spettatore;
 
-import java.sql.SQLOutput;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
 
+
 public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
 
-    Prenotazione p = new Prenotazione();
-
-
     public void aggiungiElemento (GestoreSpettatori g, GestoreFilm f, Sala[] arraySale) {
+
+        Prenotazione p = new Prenotazione();
+
         Scanner tastiera7 = new Scanner(System.in);
         System.out.println("Benvenuto, creiamo una prenotazione:");
 
-        int idUtente = 0;
+        int idUtente;
         boolean inputCorretto = false;
 
         if (!g.getListaElementi().isEmpty()) {
@@ -31,6 +31,7 @@ public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
                     for (Spettatore ut : g.getListaElementi()) {
                         if (ut.getId() == idUtente) {
                             System.out.println("ID valido");
+                            p.setSpettatore(ut);
                             inputCorretto = true;
                             break;
                         }
@@ -48,27 +49,20 @@ public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
             p.setSpettatore(g.getListaElementi().getFirst());
         }
 
-        //ricerca utente per id
-//        for (Spettatore ut : g.getListaElementi()) {
-//            if (ut.getId() == idUtente) {
-//                p.setSpettatore(ut);
-//                break;
-//            }
-//        }
-
-        String nomeF = " ";
+        String nomeF;
         boolean inputCorrettoFilm = false;
 
         if (!f.getListaElementi().isEmpty()) {
             while (!inputCorrettoFilm) {
                 Scanner tastiera8 = new Scanner(System.in);
-                System.out.println("Inserisci il titolo del film scelto: ");
                 f.mostraLista();
+                System.out.println("Inserisci il titolo del film scelto: ");
                 try {
                     nomeF = tastiera8.nextLine();
                     for (Film film : f.getListaElementi()) {
                         if (Objects.equals(film.getTitolo(), nomeF)) {
                             System.out.println("Film esistente");
+                            p.setFilm(film);
                             inputCorrettoFilm = true;
                             break;
                         }
@@ -85,13 +79,6 @@ public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
             p.setFilm(f.getListaElementi().getFirst());
         }
 
-        //ricerca film per titolo
-//        for (Film film : f.getListaElementi()) {
-//            if (film.getTitolo().equals(nomeF)) {
-//                p.setFilm(film);
-//                break;
-//            }
-//        }
         Scanner tastiera9 = new Scanner(System.in);
         System.out.println("Sale disponibili:");
         for (Sala s : arraySale) {
@@ -108,7 +95,7 @@ public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
                         p.setSala(sa);
                         sa.setCapacita(sa.getCapacita() - 1);
                         salaTrovata = true;
-                        break; //Esci dal ciclo una volta trovata una sala valida
+                        break; //Esce dal ciclo una volta trovata una sala valida
                     }
                 }
             }
@@ -117,9 +104,21 @@ public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
             }
         }
 
+        boolean prenotazioneEsistente = false;
+        for (Prenotazione prenotazione : getListaElementi()) {
+            if (prenotazione.getSpettatore().equals(p.getSpettatore()) && prenotazione.getFilm().equals(p.getFilm()) && prenotazione.getSala().equals(p.getSala())) {
+                prenotazioneEsistente = true;
+                break;
+            }
+        }
+
+        if (prenotazioneEsistente) {
+            System.out.println("Questa prenotazione esiste già!");
+        } else {
             getListaElementi().add(p);
             System.out.println("Prenotazione creata con successo!");
 
+        }
     }
 
     @Override
@@ -129,7 +128,6 @@ public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
 
     public void rimuoviElemento() {
         Scanner tastiera9 = new Scanner(System.in);
-        tastiera9.next();
         System.out.println("Inserisci l'id della prenotazione da eliminare:");
         int idDaEliminare = tastiera9.nextInt();
         for (int i = 0; i < getListaElementi().size(); i++) {
@@ -143,7 +141,7 @@ public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
         if (getListaElementi().isEmpty()) {
             System.out.println("Lista vuota!");
         }
-        else{
+        else {
             for (Prenotazione prenotazione : getListaElementi()) {
                 System.out.println(prenotazione.formatoStampa());
             }
