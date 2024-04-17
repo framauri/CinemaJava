@@ -12,38 +12,59 @@ public class GestoreSpettatori extends GestoreBase<Spettatore> {
 
     public void aggiungiElemento() {
         Scanner tastiera2 = new Scanner(System.in);
-        boolean inputCorretto = false;
         boolean utenzaEsistente = false;
+        String nome1 = "";
+        String cognome1 = "";
         System.out.println("Benvenuto, inserisci i tuoi dati nel formato\n 'nome'\n 'cognome'\n 'età':");
-        while (!inputCorretto) {
+        try {
+            nome1 = tastiera2.nextLine();
+            if (!nome1.matches("[a-zA-Z]+")) {
+                throw new InputMismatchException("Errore: il nome deve contenere solo lettere!");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println(e.getMessage());
+            return; //Esce dal metodo se si verifica un errore
+        }
 
-            try {
-                String nome1 = tastiera2.nextLine();
-                String cognome1 = tastiera2.nextLine();
-                int eta1 = tastiera2.nextInt();
-                tastiera2.nextLine(); //Consuma il resto della riga
-                utenzaEsistente = false;
-                for (Spettatore spettatore : getListaElementi()) {
-                    if (spettatore.getNome().equals(nome1) && spettatore.getCognome().equals(cognome1) && spettatore.getEta() == eta1) {
-                        utenzaEsistente = true;
-                        break;
-                    }
-                }
-                if (utenzaEsistente) {
-                    System.out.println("Questa utenza esiste già!");
-                } else {
-                    Spettatore spettatore = new Spettatore(nome1, cognome1, eta1);
-                    System.out.println("Utente creato con successo!");
-                    System.out.println("Il tuo ID utente è " + spettatore.getId());
-                    getListaElementi().add(spettatore);
-                }
-                inputCorretto = true;
-            } catch (InputMismatchException e) {
-                System.out.println("Errore: devi inserire i dati nel modo corretto.");
-                tastiera2.next(); // Consuma l'input non valido
-                System.out.println("Inserisci i tuoi dati nel formato 'nome' 'cognome' 'età':");
+        //Controllo dell'input per il cognome
+        try {
+            cognome1 = tastiera2.nextLine();
+            if (!cognome1.matches("[a-zA-Z]+")) {
+                throw new InputMismatchException("Errore: il cognome deve contenere solo lettere!");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println(e.getMessage());
+            return; //Esce dal metodo se si verifica un errore
+        }
+
+        //Controllo dell'input per l'età
+        int eta1 = 0;
+        try {
+            eta1 = tastiera2.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Errore: l'età deve essere un numero intero.");
+            return; //Esce dal metodo se si verifica un errore
+        }
+        tastiera2.nextLine(); //Consuma il resto della riga
+
+        //Verifica se lo spettatore esiste già
+        for (Spettatore spettatore : getListaElementi()) {
+            if (spettatore.getNome().equals(nome1) && spettatore.getCognome().equals(cognome1) && spettatore.getEta() == eta1) {
+                utenzaEsistente = true;
+                break;
             }
         }
+
+        //Aggiunta dello spettatore alla lista se non esiste già
+        if (utenzaEsistente) {
+            System.out.println("Questa utenza esiste già!");
+        } else {
+            Spettatore spettatore = new Spettatore(nome1, cognome1, eta1);
+            System.out.println("Utente creato con successo!");
+            System.out.println("Il tuo ID utente è " + spettatore.getId());
+            getListaElementi().add(spettatore);
+        }
+
     }
 
     public void rimuoviElemento () {
@@ -57,7 +78,7 @@ public class GestoreSpettatori extends GestoreBase<Spettatore> {
                 availableIds.offer(idDaEliminare); //Aggiunge l'ID eliminato alla coda degli ID disponibili
             }
         }
-        // Ordina la lista per ID dopo la rimozione
+        //Ordina la lista per ID dopo la rimozione
         Collections.sort(getListaElementi());
     }
 
@@ -86,11 +107,38 @@ public class GestoreSpettatori extends GestoreBase<Spettatore> {
     public void cercaIdSpettatore() {
         Scanner tastiera = new Scanner(System.in);
         System.out.println("Inserisci il nome dello spettatore:");
-        String nome = tastiera.next();
+        String nome = "";
+        try {
+        nome = tastiera.nextLine();
+            if (!nome.matches("[a-zA-Z]+")) {
+                throw new InputMismatchException();
+            }
+        }
+        catch (InputMismatchException e) {
+            System.out.println("Errore: il nome deve contenere solo lettere!");
+            return; //Esce dal metodo se si verifica un errore
+        }
+
         System.out.println("Inserisci il cognome dello spettatore:");
-        String cognome = tastiera.next();
+        String cognome = "";
+        try {
+            cognome = tastiera.nextLine();
+            if (!cognome.matches("[a-zA-Z]+")) {
+                throw new InputMismatchException();
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Errore: il nome deve contenere solo lettere!");
+            return; //Esce dal metodo se si verifica un errore
+        }
+
         System.out.println("Inserisci l'età dello spettatore:");
-        int eta = tastiera.nextInt();
+        int eta = 0;
+        try {
+            eta = tastiera.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Errore: l'età deve essere un numero intero.");
+            return; //Esce dal metodo se si verifica un errore
+        }
 
         int idSpettatore = trovaIdSpettatore(nome, cognome, eta);
         if (idSpettatore != -1) {

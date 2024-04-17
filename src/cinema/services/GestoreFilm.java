@@ -9,41 +9,55 @@ public class GestoreFilm extends GestoreBase<Film> {
 
     public void aggiungiElemento() {
         Scanner tastiera4 = new Scanner(System.in);
-        boolean inputCorretto = false;
         System.out.println("Benvenuto, inserisci i dati del film nel formato\n 'titolo'\n 'regista (cognome)'\n 'durata (minuti)':");
 
-        while (!inputCorretto) {
-            try {
-                String titolo1 = tastiera4.nextLine();
-                String regista1 = tastiera4.next();
-                int durata1 = tastiera4.nextInt();
-                tastiera4.nextLine(); //Consuma il resto della riga
+        //Controllo dell'input per il titolo
+        String titolo1 = "";
+        try {
+            titolo1 = tastiera4.nextLine();
+        } catch (InputMismatchException e) {
+            System.out.println("Errore: il titolo deve essere una stringa.");
+            return; //Esce dal metodo se si verifica un errore
+        }
 
-                boolean filmEsistente = false;
-                for (Film film : getListaElementi()) {
-                    if (film.getTitolo().equalsIgnoreCase(titolo1) && film.getRegista().equalsIgnoreCase(regista1) && film.getDurata() == durata1) {
-                        filmEsistente = true;
-                        break;
-                    }
-                }
-
-                if (filmEsistente) {
-                    System.out.println("Questo film esiste già!");
-                } else {
-                    Film film = new Film(titolo1, regista1, durata1);
-                    System.out.println("Film creato con successo!");
-                    getListaElementi().add(film);
-                }
-
-                inputCorretto = true;
-            } catch (InputMismatchException e) {
-                System.out.println("Errore: devi inserire i dati nel modo corretto.");
-                tastiera4.next(); //Consuma l'input non valido
-                System.out.println("Inserisci i dati del film nel formato corretto:");
-                System.out.println("'titolo'");
-                System.out.println("'regista (cognome)'");
-                System.out.println("'durata (min)':");
+        //Controllo dell'input per il regista
+        String regista1 = "";
+        try {
+            regista1 = tastiera4.nextLine();
+            if (!regista1.matches("[a-zA-Z]+")) {
+                throw new InputMismatchException("Errore: il cognome deve contenere solo lettere!");
             }
+        } catch (InputMismatchException e) {
+            System.out.println(e.getMessage());
+            return; //Esce dal metodo se si verifica un errore
+        }
+
+        //Controllo dell'input per la durata
+        int durata1 = 0;
+        try {
+            durata1 = tastiera4.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Errore: la durata deve essere un numero intero.");
+            return; //Esce dal metodo se si verifica un errore
+        }
+        tastiera4.nextLine(); //Consuma il resto della riga
+
+        //Verifica se il film esiste già
+        boolean filmEsistente = false;
+        for (Film film : getListaElementi()) {
+            if (film.getTitolo().equalsIgnoreCase(titolo1) && film.getRegista().equalsIgnoreCase(regista1) && film.getDurata() == durata1) {
+                filmEsistente = true;
+                break;
+            }
+        }
+
+        //Aggiunta del film alla lista se non esiste già
+        if (filmEsistente) {
+            System.out.println("Questo film esiste già!");
+        } else {
+            Film film = new Film(titolo1, regista1, durata1);
+            System.out.println("Film creato con successo!");
+            getListaElementi().add(film);
         }
     }
 
@@ -52,7 +66,6 @@ public class GestoreFilm extends GestoreBase<Film> {
     @Override
     public void rimuoviElemento() {
         Scanner tastiera5 = new Scanner(System.in);
-        tastiera5.next();
         System.out.println("Inserisci il nome del film da eliminare...");
         String filmDaEliminare = tastiera5.nextLine();
         for (int i = 0; i < getListaElementi().size(); i++) {

@@ -6,6 +6,7 @@ import cinema.models.Sala;
 import cinema.models.Spettatore;
 
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -14,69 +15,67 @@ public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
 
     public void aggiungiElemento (GestoreSpettatori g, GestoreFilm f, Sala[] arraySale) {
 
-        Prenotazione p = new Prenotazione();
+        try {
+            Prenotazione p = new Prenotazione();
 
-        Scanner tastiera7 = new Scanner(System.in);
-        System.out.println("Benvenuto, creiamo una prenotazione:");
+            Scanner tastiera7 = new Scanner(System.in);
+            System.out.println("Benvenuto, creiamo una prenotazione:");
 
-        int idUtente;
-        boolean inputCorretto = false;
+            int idUtente;
+            boolean inputCorretto = false;
 
-        if (!g.getListaElementi().isEmpty()) {
-            while (!inputCorretto) {
-                System.out.println("Inserisci l'ID utente: ");
-                try {
-                    idUtente = tastiera7.nextInt();
-                    for (Spettatore ut : g.getListaElementi()) {
-                        if (ut.getId() == idUtente) {
-                            System.out.println("ID valido");
-                            p.setSpettatore(ut);
-                            inputCorretto = true;
-                            break;
+            if (!g.getListaElementi().isEmpty()) {
+                while (!inputCorretto) {
+                    System.out.println("Inserisci l'ID utente: ");
+                    try {
+                        idUtente = tastiera7.nextInt();
+                        for (Spettatore ut : g.getListaElementi()) {
+                            if (ut.getId() == idUtente) {
+                                System.out.println("ID valido");
+                                p.setSpettatore(ut);
+                                inputCorretto = true;
+                                break;
+                            }
                         }
+                    } catch (InputMismatchException e) {
+                        System.out.println("Errore: devi inserire un numero intero.");
+                        tastiera7.next();
                     }
-                } catch (InputMismatchException e) {
-                    System.out.println("Errore: devi inserire un numero intero.");
-                    tastiera7.next();
                 }
+            } else {
+                System.out.println("Lista vuota! Devi prima creare un'utenza!");
+                g.aggiungiElemento();
+                p.setSpettatore(g.getListaElementi().getFirst());
             }
-        }
-        else{
-            System.out.println("Lista vuota! Devi prima creare un utenza!");
-            g.aggiungiElemento();
 
-            p.setSpettatore(g.getListaElementi().getFirst());
-        }
+            String nomeF;
+            boolean inputCorrettoFilm = false;
 
-        String nomeF;
-        boolean inputCorrettoFilm = false;
-
-        if (!f.getListaElementi().isEmpty()) {
-            while (!inputCorrettoFilm) {
-                Scanner tastiera8 = new Scanner(System.in);
-                f.mostraLista();
-                System.out.println("Inserisci il titolo del film scelto: ");
-                try {
-                    nomeF = tastiera8.nextLine();
-                    for (Film film : f.getListaElementi()) {
-                        if (Objects.equals(film.getTitolo(), nomeF)) {
-                            System.out.println("Film esistente");
-                            p.setFilm(film);
-                            inputCorrettoFilm = true;
-                            break;
+            if (!f.getListaElementi().isEmpty()) {
+                while (!inputCorrettoFilm) {
+                    Scanner tastiera8 = new Scanner(System.in);
+                    f.mostraLista();
+                    System.out.println("Inserisci il titolo del film scelto: ");
+                    try {
+                        nomeF = tastiera8.nextLine();
+                        for (Film film : f.getListaElementi()) {
+                            if (Objects.equals(film.getTitolo(), nomeF)) {
+                                System.out.println("Film esistente");
+                                p.setFilm(film);
+                                inputCorrettoFilm = true;
+                                break;
+                            }
                         }
+                    } catch (InputMismatchException e) {
+                        System.out.println("Errore: devi inserire un film esistente.");
                     }
-                } catch (InputMismatchException e) {
-                    System.out.println("Errore: devi inserire un film esistente.");
                 }
-            }
-        }
-        else{
-            System.out.println("Lista vuota! Devi prima creare un film!");
-            f.aggiungiElemento();
+            } else {
+                System.out.println("Lista vuota! Devi prima creare un film!");
+                f.aggiungiElemento();
 
-            p.setFilm(f.getListaElementi().getFirst());
-        }
+                p.setFilm(f.getListaElementi().getFirst());
+            }
 
         Scanner tastiera9 = new Scanner(System.in);
         System.out.println("Sale disponibili:");
@@ -117,6 +116,10 @@ public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
             getListaElementi().add(p);
             System.out.println("Prenotazione creata con successo!");
 
+        }
+        }
+        catch (NoSuchElementException e){
+            System.out.println("---------------------------------");
         }
     }
 

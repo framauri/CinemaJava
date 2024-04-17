@@ -11,7 +11,8 @@ public class Main {
 
     public static Sala sala1 = new Sala(1,100);
     public static Sala sala2 = new Sala(2,150);
-    static Sala[] arraySale = {sala1, sala2};
+    public static Sala sala3 = new Sala(3,200);
+    static Sala[] arraySale = {sala1, sala2, sala3};
 
 
     public static void main(String[] args) {
