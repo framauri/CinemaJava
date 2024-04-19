@@ -1,6 +1,6 @@
 package cinema.services;
 
-public interface Interfaccia<T> {
+public interface GestioneLista<T> {
     void aggiungiElemento();
 
     void rimuoviElemento();

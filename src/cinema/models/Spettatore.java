@@ -4,6 +4,11 @@ import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
 
+/**
+ * Classe Spettatore
+ * Classe che definisce la struttura di uno spettatore
+ */
+
 public class Spettatore implements Comparable<Spettatore> {
     private static int maxId = 0;
     private int id;
@@ -83,11 +88,21 @@ public class Spettatore implements Comparable<Spettatore> {
         return Objects.hash(id, nome, cognome, eta);
     }
 
+    /**
+     * Metodo compareTo
+     * @param altro the object to be compared.
+     * @return
+     */
     public int compareTo(Spettatore altro) {
         //Ordina gli spettatori in base all'ID
         return Integer.compare(this.id, altro.getId());
     }
 
+    /**
+     * Metodo formatoStampa
+     * Metodo usato in GestoreSpettatori.mostraLista() e GestorePrenotazioni.mostraLista() per migliorare la stampa a terminale dei dati di uno spettatore
+     * @return id nome cognome eta
+     */
     public String formatoStampa() {
         return  "---------------------------------" + "\n" +
                 "ID Spettatore: " + id + "\n" +

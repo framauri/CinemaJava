@@ -9,7 +9,6 @@ import static cinema.models.Spettatore.availableIds;
 
 public class GestoreSpettatori extends GestoreBase<Spettatore> {
 
-
     public void aggiungiElemento() {
         Scanner tastiera2 = new Scanner(System.in);
         boolean utenzaEsistente = false;

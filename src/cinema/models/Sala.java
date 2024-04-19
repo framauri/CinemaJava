@@ -2,6 +2,11 @@ package cinema.models;
 
 import java.util.Objects;
 
+/**
+ * Classe Sala
+ * Classe che definisce la struttura di una sala
+ */
+
 public class Sala {
     private int numero;
     private int capacita;
@@ -53,6 +58,12 @@ public class Sala {
         return Objects.hash(numero, capacita);
     }
 
+
+    /**
+     * Metodo formatoStampa
+     * Metodo usato in GestorePrenotazioni.mostraLista() per migliorare la stampa a terminale dei dati di una sala
+     * @return numero
+     */
     public String formatoStampa() {
         return  "---------------------------------" + "\n" +
                 "Numero Sala: " + numero;
