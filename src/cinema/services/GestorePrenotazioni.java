@@ -8,6 +8,7 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
+import static cinema.Main.numeroPrenotazioni;
 
 /**
  * Classe GestioneFilm
@@ -16,7 +17,6 @@ import java.util.Scanner;
 
 public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
 
-    public static int numeroPrenotazioni = 0;
     /**
      * Metodo aggiungiElemento
      * Metodo per la creazione e l'aggiunta di una prenotazione alla lista di elementi
