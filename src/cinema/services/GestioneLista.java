@@ -1,16 +1,22 @@
 package cinema.services;
 
+/**
+ * Interfaccia GestioneLista
+ * Interfaccia implementata da GestoreBase che fornisce metodi definiti nei gestori
+ * @param <T>
+ */
+
 public interface GestioneLista<T> {
 
     /**
      * Metodo aggiungiElemento
-     * Metodo usato da GestoreFilm, GestorePrenotazioni e GestoreSpettatori per aggiungere un elemento alla lista
+     * Metodo usato da GestoreFilm, GestorePrenotazioni e GestoreSpettatori per aggiungere un elemento all'ArrayList
      */
     void aggiungiElemento();
 
     /**
      * Metodo rimuoviElemento
-     * Metodo usato da GestoreFilm, GestorePrenotazioni e GestoreSpettatori per rimuovere un elemento dalla lista
+     * Metodo usato da GestoreFilm, GestorePrenotazioni e GestoreSpettatori per rimuovere un elemento all'ArrayList
      */
     void rimuoviElemento();
 

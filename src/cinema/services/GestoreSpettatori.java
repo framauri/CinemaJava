@@ -12,6 +12,10 @@ import static cinema.models.Spettatore.availableIds;
 
 public class GestoreSpettatori extends GestoreBase<Spettatore> {
 
+    /**
+     * Metodo aggiungiElemento di GestoreSpettatori
+     * @throws InputMismatchException
+     */
     public void aggiungiElemento() {
         Scanner tastiera2 = new Scanner(System.in);
         boolean utenzaEsistente = false;
@@ -76,6 +80,7 @@ public class GestoreSpettatori extends GestoreBase<Spettatore> {
 
         for (int i = 0; i < getListaElementi().size(); i++) {
             if (getListaElementi().get(i).getId() == (idDaEliminare)) {
+                System.out.println("Spettatore con id " + getListaElementi().get(i).getId() + " eliminato!");
                 getListaElementi().remove(getListaElementi().get(i));
                 availableIds.offer(idDaEliminare); //Aggiunge l'ID eliminato alla coda degli ID disponibili
             }

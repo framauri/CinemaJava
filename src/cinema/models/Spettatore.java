@@ -15,7 +15,7 @@ public class Spettatore implements Comparable<Spettatore> {
     private String nome;
     private String cognome;
     private int eta;
-    public static Queue<Integer> availableIds = new LinkedList<>();
+    public static Queue<Integer> availableIds = new LinkedList<>(); //Queue utilizzata per ottimizzare l'assegnazione di id
 
 
     public Spettatore () {
@@ -91,7 +91,7 @@ public class Spettatore implements Comparable<Spettatore> {
     /**
      * Metodo compareTo
      * @param altro Oggetto Spettatore per il sort degli elementi in base all'ID
-     * @return listaElementi
+     * @return listaElementi ordinata per ID
      */
     public int compareTo(Spettatore altro) {
         //Ordina gli spettatori in base all'ID
@@ -100,7 +100,7 @@ public class Spettatore implements Comparable<Spettatore> {
 
     /**
      * Metodo formatoStampa
-     * Metodo usato in GestoreSpettatori.mostraLista() e GestorePrenotazioni.mostraLista() per migliorare la stampa a terminale dei dati di uno spettatore
+     * Metodo usato in GestoreSpettatori.mostraLista() e GestorePrenotazioni.mostraLista() per migliorare la stampa a terminale dello stato di uno spettatore
      * @return id nome cognome eta
      */
     public String formatoStampa() {

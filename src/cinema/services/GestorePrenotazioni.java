@@ -4,7 +4,6 @@ import cinema.models.Film;
 import cinema.models.Prenotazione;
 import cinema.models.Sala;
 import cinema.models.Spettatore;
-
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -17,10 +16,18 @@ import java.util.Scanner;
 
 public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
 
-    public void aggiungiElemento (GestoreSpettatori g, GestoreFilm f, Sala[] arraySale) {
+    public static int numeroPrenotazioni = 0;
+    /**
+     * Metodo aggiungiElemento
+     * Metodo per la creazione e l'aggiunta di una prenotazione alla lista di elementi
+     * @param gestoreSpettatori
+     * @param gestoreFilm
+     * @param arraySale
+     */
 
+    public void aggiungiElemento ( GestoreSpettatori gestoreSpettatori, GestoreFilm gestoreFilm, Sala[] arraySale ) {
         try {
-            Prenotazione p = new Prenotazione();
+            Prenotazione prenotazione = new Prenotazione();
 
             Scanner tastiera7 = new Scanner(System.in);
             System.out.println("Benvenuto, creiamo una prenotazione:");
@@ -28,15 +35,15 @@ public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
             int idUtente;
             boolean inputCorretto = false;
 
-            if (!g.getListaElementi().isEmpty()) {
+            if (!gestoreSpettatori.getListaElementi().isEmpty()) {
                 while (!inputCorretto) {
                     System.out.println("Inserisci l'ID utente: ");
                     try {
                         idUtente = tastiera7.nextInt();
-                        for (Spettatore ut : g.getListaElementi()) {
+                        for (Spettatore ut : gestoreSpettatori.getListaElementi()) {
                             if (ut.getId() == idUtente) {
                                 System.out.println("ID valido");
-                                p.setSpettatore(ut);
+                                prenotazione.setSpettatore(ut);
                                 inputCorretto = true;
                                 break;
                             }
@@ -48,24 +55,24 @@ public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
                 }
             } else {
                 System.out.println("Lista vuota! Devi prima creare un'utenza!");
-                g.aggiungiElemento();
-                p.setSpettatore(g.getListaElementi().getFirst());
+                gestoreSpettatori.aggiungiElemento();
+                prenotazione.setSpettatore(gestoreSpettatori.getListaElementi().getFirst());
             }
 
             String nomeF;
             boolean inputCorrettoFilm = false;
 
-            if (!f.getListaElementi().isEmpty()) {
+            if (!gestoreFilm.getListaElementi().isEmpty()) {
                 while (!inputCorrettoFilm) {
                     Scanner tastiera8 = new Scanner(System.in);
-                    f.mostraLista();
+                    gestoreFilm.mostraLista();
                     System.out.println("Inserisci il titolo del film scelto: ");
                     try {
                         nomeF = tastiera8.nextLine();
-                        for (Film film : f.getListaElementi()) {
+                        for (Film film : gestoreFilm.getListaElementi()) {
                             if (Objects.equals(film.getTitolo(), nomeF)) {
                                 System.out.println("Film esistente");
-                                p.setFilm(film);
+                                prenotazione.setFilm(film);
                                 inputCorrettoFilm = true;
                                 break;
                             }
@@ -76,82 +83,107 @@ public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
                 }
             } else {
                 System.out.println("Lista vuota! Devi prima creare un film!");
-                f.aggiungiElemento();
+                gestoreFilm.aggiungiElemento();
 
-                p.setFilm(f.getListaElementi().getFirst());
+                prenotazione.setFilm(gestoreFilm.getListaElementi().getFirst());
             }
 
-        Scanner tastiera9 = new Scanner(System.in);
-        System.out.println("Sale disponibili:");
-        for (Sala s : arraySale) {
-            System.out.println(s.getNumero());
-        }
+            Scanner tastiera9 = new Scanner(System.in);
+            System.out.println("Sale disponibili:");
+            for (Sala sala : arraySale) {
+                System.out.println(sala.getNumero());
+            }
 
-        boolean salaTrovata = false;
-        while (!salaTrovata){
-            try{
-                System.out.println("Inserisci il numero della sala:");
-                int numSala = tastiera9.nextInt();
-                for (Sala sa : arraySale) {
-                    if (sa.getNumero() == numSala && sa.getCapacita() > 0) {
-                        p.setSala(sa);
-                        sa.setCapacita(sa.getCapacita() - 1);
-                        salaTrovata = true;
-                        break; //Esce dal ciclo una volta trovata una sala valida
+            boolean salaTrovata = false;
+            while (!salaTrovata) {
+                try {
+                    System.out.println("Inserisci il numero della sala:");
+                    int numSala = tastiera9.nextInt();
+                    for (Sala sala : arraySale) {
+                        if (sala.getNumero() == numSala && sala.getCapacita() > 0) {
+                            prenotazione.setSala(sala);
+                            sala.setCapacita(sala.getCapacita() - 1);
+                            salaTrovata = true;
+                            break; //Esce dal ciclo una volta trovata una sala valida
+                        }
                     }
+                } catch (Exception e) {
+                    System.out.println("Errore: devi inserire una sala esistente.");
                 }
             }
-            catch (Exception e){
-                System.out.println("Errore: devi inserire una sala esistente.");
+
+            boolean prenotazioneEsistente = false;
+            for (Prenotazione pren : getListaElementi()) {
+                if (pren.getSpettatore().equals(prenotazione.getSpettatore()) && pren.getFilm().equals(prenotazione.getFilm()) && pren.getSala().equals(prenotazione.getSala())) {
+                    prenotazioneEsistente = true;
+                    break;
+                }
             }
-        }
 
-        boolean prenotazioneEsistente = false;
-        for (Prenotazione prenotazione : getListaElementi()) {
-            if (prenotazione.getSpettatore().equals(p.getSpettatore()) && prenotazione.getFilm().equals(p.getFilm()) && prenotazione.getSala().equals(p.getSala())) {
-                prenotazioneEsistente = true;
-                break;
+            if (prenotazioneEsistente) {
+                System.out.println("Questa prenotazione esiste già!");
+            } else {
+                getListaElementi().add(prenotazione);
+                System.out.println("Prenotazione creata con successo!");
+                numeroPrenotazioni++;
             }
-        }
-
-        if (prenotazioneEsistente) {
-            System.out.println("Questa prenotazione esiste già!");
-        } else {
-            getListaElementi().add(p);
-            System.out.println("Prenotazione creata con successo!");
-
-        }
-        }
-        catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             System.out.println("---------------------------------");
         }
     }
 
     @Override
     public void aggiungiElemento () {
-
     }
 
-    public void rimuoviElemento() {
+    public void rimuoviElemento () {
         Scanner tastiera9 = new Scanner(System.in);
         System.out.println("Inserisci l'id della prenotazione da eliminare:");
         int idDaEliminare = tastiera9.nextInt();
+        //For per trovare la prenotazione tramite id e, se esistente, la rimuove dalla lista
         for (int i = 0; i < getListaElementi().size(); i++) {
             if (getListaElementi().get(i).getId() == idDaEliminare) {
+                System.out.println("Prenotazione con id " + getListaElementi().get(i).getId() + " eliminata!");
                 getListaElementi().remove(getListaElementi().get(i));
             }
         }
     }
 
-    public void mostraLista() {
+    public void mostraLista () {
         if (getListaElementi().isEmpty()) {
             System.out.println("Lista vuota!");
-        }
-        else {
+        } else {
             for (Prenotazione prenotazione : getListaElementi()) {
                 System.out.println(prenotazione.formatoStampa());
             }
         }
 
+    }
+
+    public static void funFact () {
+        System.out.println("Sono state create " + numeroPrenotazioni + " prenotazioni oggi");
+        System.out.println("Significa che il nostro cinema sta fatturando!");
+        System.out.println("                        ░░░░                      \n" +
+                "                    ░░░░  ░░░░                    \n" +
+                "                    ░░░░░░░░░░                    \n" +
+                "                        ░░░░                      \n" +
+                "                                                  \n" +
+                "          ▒▒▒▒    ▒▒▒▒▒▒▒▒▒▒▒▒▒▒                  \n" +
+                "          ▒▒░░▒▒▒▒░░░░░░░░░░░░░░▒▒▒▒              \n" +
+                "          ▒▒▒▒▒▒░░░░░░▒▒▒▒▒▒▒▒░░░░░░▒▒            \n" +
+                "        ▒▒░░░░░░░░▒▒▒▒░░░░░░▒▒▒▒░░░░▒▒            \n" +
+                "        ▒▒░░██░░░░░░░░░░░░░░░░░░░░░░░░▒▒          \n" +
+                "    ▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒        \n" +
+                "    ▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒  ▒▒    \n" +
+                "    ▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒      \n" +
+                "      ▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒          \n" +
+                "        ▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒          \n" +
+                "          ▒▒▒▒░░░░░░░░░░░░░░░░░░░░▒▒▒▒            \n" +
+                "            ▒▒▒▒▒▒░░░░░░░░░░░░▒▒▒▒▒▒              \n" +
+                "            ▒▒░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░▒▒              \n" +
+                "            ▒▒▒▒▒▒            ▒▒▒▒▒▒              \n" +
+                "                                                  \n" +
+                "                                                  \n" +
+                "██████████████████████████████████████████████████\n");
     }
 }

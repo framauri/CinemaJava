@@ -80,9 +80,15 @@ public class Main {
                     break;
 
                 case "11":
+                    System.out.println("Hai selezionato 'Fun Fact'");
+                    GestorePrenotazioni.funFact();
+                    break;
+
+                case "12":
                     System.out.println("Hai selezionato 'Uscire'");
                     System.out.println("Bye");
                     exit = false;
+
                 default:
                     System.out.println("Inserisci un numero da 1 a 7");
             }
@@ -104,7 +110,8 @@ public class Main {
         System.out.println("8 - Mostrare lista film");
         System.out.println("9 - Mostrare lista prenotazioni");
         System.out.println("10 - Ricercare ID utente");
-        System.out.println("11 - Uscita");
+        System.out.println("11 - Fun Fact");
+        System.out.println("12 - Uscita");
         System.out.println("*****************************************");
 
         scelta = tastiera1.nextLine();

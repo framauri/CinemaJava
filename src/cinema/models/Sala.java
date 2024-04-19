@@ -61,7 +61,7 @@ public class Sala {
 
     /**
      * Metodo formatoStampa
-     * Metodo usato in GestorePrenotazioni.mostraLista() per migliorare la stampa a terminale dei dati di una sala
+     * Metodo usato in GestorePrenotazioni.mostraLista() per migliorare la stampa a terminale dello stato di una sala
      * @return numero
      */
     public String formatoStampa() {

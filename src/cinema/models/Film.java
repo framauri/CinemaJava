@@ -71,7 +71,7 @@ public class Film {
 
     /**
      * Metodo formatoStampa
-     * Metodo usato in GestoreFilm.mostraLista() per migliorare la stampa a terminale dei dati di un film
+     * Metodo usato in GestoreFilm.mostraLista() per migliorare la stampa a terminale dello stato di un film
      * @return titolo regista durata
      */
     public String formatoStampa() {

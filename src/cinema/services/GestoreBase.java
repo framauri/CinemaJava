@@ -3,8 +3,9 @@ package cinema.services;
 import java.util.ArrayList;
 
 /**
+ * Classe astratta GestoreBase
  * Classe astratta che si occupa della creazione di un ArrayList di oggetti generici e definisce il metodo getLista elementi.
- * Questa classe fa da padre per i gestori di oggetti che la estendono.
+ * Questa classe è la classe padre dei gestori che la estendono.
  * Implementa l'interfaccia GestioneLista.
  * @param <T>
  */

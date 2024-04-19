@@ -12,6 +12,11 @@ import java.util.Scanner;
 
 public class GestoreFilm extends GestoreBase<Film> {
 
+    /**
+     * Metodo aggiungiElemento di GestoreFilm
+     * @throws InputMismatchException
+     */
+
     public void aggiungiElemento() {
         Scanner tastiera4 = new Scanner(System.in);
         System.out.println("Benvenuto, inserisci i dati del film nel formato\n 'titolo'\n 'regista (cognome)'\n 'durata (minuti)':");
@@ -70,8 +75,10 @@ public class GestoreFilm extends GestoreBase<Film> {
         Scanner tastiera5 = new Scanner(System.in);
         System.out.println("Inserisci il nome del film da eliminare...");
         String filmDaEliminare = tastiera5.nextLine();
+        //For per trovare il film e, se esistente, lo rimuove dalla lista
         for (int i = 0; i < getListaElementi().size(); i++) {
             if (getListaElementi().get(i).getTitolo().equals(filmDaEliminare)) {
+                System.out.println("Film con titolo " + getListaElementi().get(i).getTitolo() + " eliminato!");
                 getListaElementi().remove(getListaElementi().get(i));
             }
         }
