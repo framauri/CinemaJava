@@ -5,6 +5,11 @@ import cinema.models.Film;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Classe GestoreFilm
+ * Classe che eredita i metodi da GestoreBase e li redefinisce per gestire la lista di film
+ */
+
 public class GestoreFilm extends GestoreBase<Film> {
 
     public void aggiungiElemento() {
@@ -61,9 +66,6 @@ public class GestoreFilm extends GestoreBase<Film> {
         }
     }
 
-
-
-    @Override
     public void rimuoviElemento() {
         Scanner tastiera5 = new Scanner(System.in);
         System.out.println("Inserisci il nome del film da eliminare...");
@@ -86,5 +88,4 @@ public class GestoreFilm extends GestoreBase<Film> {
         }
 
     }
-
 }

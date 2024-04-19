@@ -1,11 +1,14 @@
 package cinema.services;
-
 import cinema.models.Spettatore;
-
 import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import static cinema.models.Spettatore.availableIds;
+
+/**
+ * Classe GestioneSpettatori
+ * Classe che eredita i metodi da GestoreBase e li redefinisce per gestire la lista di spettatori
+ */
 
 public class GestoreSpettatori extends GestoreBase<Spettatore> {
 
@@ -93,6 +96,15 @@ public class GestoreSpettatori extends GestoreBase<Spettatore> {
         }
     }
 
+    /**
+     * Metodo trovaIdSpettatore
+     * Metodo che viene sfruttato da CercaIdSpettatore per verificare la presenza di uno spettatore nella lista dati i parametri forniti
+     * @param nome
+     * @param cognome
+     * @param eta
+     * @return Id dello spettatore se presente, -1 se non viene trovato
+     */
+
     public int trovaIdSpettatore(String nome, String cognome, int eta) {
         for (Spettatore spettatore : getListaElementi()) {
             if (spettatore.getNome().equals(nome) && spettatore.getCognome().equals(cognome) && spettatore.getEta() == eta) {
@@ -102,6 +114,11 @@ public class GestoreSpettatori extends GestoreBase<Spettatore> {
         return -1; //Ritorna -1 se lo spettatore non è stato trovato
     }
 
+    /**
+     * Metodo cercaIdSpettatore
+     * Metodo che chiede l'inserimento di nome, cognome e età dello spettatore da cercare e li passa come argomenti alla chiamata di trovaIdSpettatore
+     * @throws InputMismatchException
+     */
 
     public void cercaIdSpettatore() {
         Scanner tastiera = new Scanner(System.in);

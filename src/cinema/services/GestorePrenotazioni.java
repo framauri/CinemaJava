@@ -10,6 +10,10 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Classe GestioneFilm
+ * Classe che eredita i metodi da GestoreBase e li redefinisce per gestire la lista di film
+ */
 
 public class GestorePrenotazioni extends GestoreBase<Prenotazione> {
 

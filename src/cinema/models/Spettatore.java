@@ -90,8 +90,8 @@ public class Spettatore implements Comparable<Spettatore> {
 
     /**
      * Metodo compareTo
-     * @param altro the object to be compared.
-     * @return
+     * @param altro Oggetto Spettatore per il sort degli elementi in base all'ID
+     * @return listaElementi
      */
     public int compareTo(Spettatore altro) {
         //Ordina gli spettatori in base all'ID
